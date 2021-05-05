@@ -1,0 +1,148 @@
+<%- include ('_header') -%>
+<div class="container mt-3">
+  <div class="container">
+<h1 class="text-center mb-3">Friends List</h1>
+<% if (Friends.length>0) {%>
+<% for(var i=0; i<Friends.length; i++) {%>
+  <div class="d-flex justify-content-center">
+  <form method="POST" action="/process">
+    <div class="row w-100">
+
+        <input
+          
+          type="text"
+          name="id"
+          value="<%= Friends[i][0] %>"
+          hidden
+          required
+        />
+    
+      <div class="col border">
+        <input
+          class="border-0 pt-2 w-100 "
+          type="text"
+          name="firstname"
+          value="<%= Friends[i][1] %>"
+          required
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 pt-2  w-100"
+          type="text"
+          name="lastname"
+          value="<%= Friends[i][2] %>"
+          required
+        />
+      </div>
+      <div class="col d-flex" >
+       
+        
+        <button
+          class="mx-auto btn btn-outline-warning btn-sm w-35"
+          name="butt"
+          value="edit"
+        >
+          Edit
+        </button>
+
+        <button
+          class="mx-auto btn btn-outline-danger btn-sm w-55"
+          name="butt"
+          value="remove"
+        >
+          Remove
+        </button>
+      </div>
+      </div>
+
+
+
+  </form>
+</div>
+
+  <% } %>
+  <% } else{%>
+    <h2>No Data Found</h2>
+    <%}%>
+  </div>
+  </div>
+    <div class="container mt-3">
+      <div class="container">
+  <form action="/submit" method="POST" class="Manual-entry">
+    <div class="table-responsive">
+      <table class="table table-bordered w-200 mt-5">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  value="First Name"
+                  readonly
+                />
+              </div>
+            </th>
+            <th scope="col">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  value="Last Name"
+                  readonly
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td scope="row">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="John"
+                  name="firstname"
+            
+              
+                  required
+                />
+              </div>
+            </td>
+            <td scope="row">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Smith"
+                  name="lastname"
+         
+                
+                  required
+                />
+              </div>
+            </td> 
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center mt-3">
+      
+      <button class="btn btn-outline-success btn-lg" type="submit" >
+        Add Friend
+      </button>
+    </div>
+  
+    <br /><br />
+  </form>
+
+</div>
+
+</div><%- include('_footer') -%>
+  <%- include('_scripts') -%>
+</Friends.length;>
+
+<!-- Friends Page -->

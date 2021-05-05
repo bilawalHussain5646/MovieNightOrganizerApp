@@ -1,0 +1,265 @@
+<%- include ('_header') -%>
+<div class="container mt-3">
+<h1 class="text-center mb-3">Movies List</h1>
+<div class="container">
+  <% if (Movies.length>0) {%>
+<% for(var i=0; i<Movies.length; i++) {%>
+  <form method="POST" action="/process-movies">
+    <div class="row">
+      
+      <div class="col text-center mt-3 mb-3">
+        <% let frID = parseInt(Movies[i][1]) %>
+        <strong><% for(var j=0; j<Friends.length; j++) {
+          if (Friends[j][0]==frID){%>
+            <%=Friends[j][1] + ' ' + Friends[j][2]%>
+            <%break;
+          }
+        }
+          %></strong>
+   
+      </div>
+    </div>
+    <div class="row">
+        <input
+   
+          type="text"
+          name="id"
+          value="<%= Movies[i][0] %>"
+      
+          hidden
+          required
+        />
+          <input
+          type="text"
+          name="friendid"
+          value="<%= Movies[i][1] %>"
+   
+          hidden
+          required
+        />
+      <div class="col">
+        <div class="row">
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie1"
+          placeholder="Movie 1"
+          value="<%= Movies[i][2] %>"
+          required
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie2"
+          placeholder="Movie 2"
+          value="<%= Movies[i][3] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie3"
+          placeholder="Movie 3"
+          value="<%= Movies[i][4] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie4"
+          placeholder="Movie 4"
+          value="<%= Movies[i][5] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie5"
+          placeholder="Movie 5"
+          value="<%= Movies[i][6] %>"
+          
+        />
+      </div>
+   
+    
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie6"
+          placeholder="Movie 6"
+          value="<%= Movies[i][7] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie7"
+          placeholder="Movie 7"
+          value="<%= Movies[i][8] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie8"
+          placeholder="Movie 8"
+          value="<%= Movies[i][9] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie9"
+          placeholder="Movie 9"
+          value="<%= Movies[i][10] %>"
+          
+        />
+      </div>
+      <div class="col border">
+        <input
+          class="border-0 p-2"
+          type="text"
+          name="movie10"
+          placeholder="Movie 10"
+          value="<%= Movies[i][11] %>"
+          
+        />
+      </div>
+
+    </div>
+    </div>
+    <div class="col-auto">
+    
+    
+        <button
+          class="btn btn-outline-warning btn-lg h-100"
+          name="action"
+          value="edit"
+        >
+          Edit
+        </button>
+
+
+      </div>
+    </div>
+  </form>
+
+
+
+  <% } %>
+  <% } else{%>
+    <h2>No Data Found</h2>
+    <%}%>
+  
+  <form action="/submit-movies" method="POST" class="Manual-entry">
+  
+      <h2 class="mt-5 mb-3 text-center">Add Movies of New Friends</h2>
+      <div class="row d-flex form-group mt-5">
+        <label class="col-2 text-center mt-1"for="friendname">Friend Name</label>
+        <select class="col-10 form-control" id="friendname" name="friendid" required>
+          <option value="-1">No Friend Selected</option>
+
+
+          <% 
+          var listOfFriends=[]; var boolcheck = false;
+          for(var i=0; i<Friends.length; i++) {
+            boolcheck = false;
+            for (var j=0;j<Movies.length;j++){
+              if (Friends[i][0] == Movies[j][1] ){
+                boolcheck = true;
+                break;
+              } else{
+                boolcheck = false;
+              }
+            }
+            if (!boolcheck){
+              listOfFriends.push(Friends[i][0])
+            }
+          }
+        
+          for (var b=0;b<listOfFriends.length;b++){
+            for (var c=0;c<Friends.length;c++){
+              if (listOfFriends[b]==Friends[c][0]){ %>
+                <option value="<%= Friends[c][0] %>">
+                  <%= Friends[c][1] + ' ' + Friends[c][2] %>
+                </option>
+                <% }
+            }
+          }%>
+          
+        </select>
+      </div>
+      <div class="row">
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie1" name="movie1" placeholder="Movie 1 Name" required>
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie2" name="movie2" placeholder="Movie 2 Name">
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie3" name="movie3" placeholder="Movie 3 Name">
+      </div>
+      <div class="col-3 form-group">
+       
+        <input type="text" class="form-control" id="movie4" name="movie4" placeholder="Movie 4 Name">
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie5" name="movie5" placeholder="Movie 5 Name">
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie6" name="movie6" placeholder="Movie 6 Name">
+      </div>
+      <div class="col-3 form-group">
+       
+        <input type="text" class="form-control" id="movie7" name="movie7" placeholder="Movie 7 Name">
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie8" name="movie8" placeholder="Movie 8 Name">
+      </div>
+      <div class="col-3 form-group">
+       
+        <input type="text" class="form-control" id="movie9" name="movie9" placeholder="Movie 9 Name">
+      </div>
+      <div class="col-3 form-group">
+        
+        <input type="text" class="form-control" id="movie10" name="movie10" placeholder="Movie 10 Name">
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      
+      <button class="btn btn-outline-success btn-lg" type="submit" >
+        Add Movies
+      </button>
+    </div>
+  
+    <br /><br />
+  </form>
+</div>
+</div>
+</div>
+<%- include('_footer') -%>
+  <%- include('_scripts') -%>
+  
+</Movies.length;>
